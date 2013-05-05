@@ -1,5 +1,11 @@
-﻿Easy-Alt Typography
-===================
+﻿EAT
+===
+
+Easy-Alt Typography, Version 1.0.
+
+
+Description
+-----------
 
 Easily enter proper typographical symbols and characters, anywhere.
 

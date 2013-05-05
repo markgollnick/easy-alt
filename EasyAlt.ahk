@@ -1,4 +1,4 @@
-﻿; Easy-Alt Typography
+﻿; Easy-Alt Typography (EAT v1.0)
 ; Easily enter proper typographical symbols and characters, anywhere.
 ; Originally written by Mark R. Gollnick <mark.r.gollnick@gmail.com> &#10013;
 ; Inspired by Dmitry Ivanov's closed project, windows_typographic_hotkeys
