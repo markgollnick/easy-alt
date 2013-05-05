@@ -23,8 +23,9 @@ Installation
 
 1. Install [AutoHotKey][] (for Windows)
     * You may try [IronAHK][] if you are on Linux, but no guarantees.
-2. Run the `EasyAlt.ahk` script with AutoHotKey.
-    * (Just double-click the file.)
+2. Save `EasyAlt.ahk` and `supported.txt` into the same directory, and run the
+   `EasyAlt.ahk` script with AutoHotKey.
+    * (Just double-click it to run.)
 3. Press ALT + {any key you want}
     * Seriously, try it out!
 

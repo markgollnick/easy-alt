@@ -11,6 +11,7 @@
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+global SupportedChars := "supported.txt" ; Supported chars. KEEP UP-TO-DATE.
 
 
 ; ============================================================================+
@@ -24,7 +25,7 @@ CharacterCarousel(Carousel)
     Send, {Ctrl down}c{Ctrl up}
     ClipWait, 0.2 ; 200 milliseconds to initialize the clipboard
     
-    ; Read the array
+    ; Read the pseudo-array
     max_index = 0
     Loop, Parse, Carousel, " "
     {
@@ -32,7 +33,7 @@ CharacterCarousel(Carousel)
         Array_%max_index% := A_LoopField
     }
     
-    ; Search the array
+    ; Search the pseudo-array
     index = 0
     Loop, %max_index%
     {
@@ -42,7 +43,7 @@ CharacterCarousel(Carousel)
             break
     }
     
-    ; Loop back to the first item
+    ; Loop back to the first item, in case not found
     max_index += 1
     Array_%max_index% := Array_1
     
@@ -63,6 +64,50 @@ PrintNextChar(CharList)
     return
 }
 
+IsSupportedChar(Char)
+{
+    returning = False ; Assume no
+    
+    ; This is incredibly inefficient. It reads from the disk every single time...
+    max_index = 0
+    Loop, Read, %A_ScriptDir%/%SupportedChars%
+    {
+        max_index += 1
+        Supported_%max_index% := A_LoopReadLine
+    }
+    
+    ; Search for the character in the pseudo-array
+    index = 0
+    Loop, %max_index%
+    {
+        index += 1
+        Element := Supported_%index%
+        if Char = %Element%
+        {
+            returning = True ; Found it!
+            break
+        }
+    }
+    
+    return, returning
+}
+
+DeselectPrintedChar()
+{
+    ; Initialize the clipboard
+    Clipboard = ; null
+    Send, {Ctrl down}c{Ctrl up}
+    ClipWait, 0.2 ; 200 milliseconds to initialize the clipboard
+    
+    ; Decide if the selected character is one of the supported characters.
+    Value := IsSupportedChar(Clipboard)
+    if Value = True
+    {
+        Send, {Right} ; If it's most likely a character we typed, deselect it.
+        Clipboard = ; null
+    }
+}
+
 
 ; ============================================================================+
 ; THE HOTKEYS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::|
@@ -76,8 +121,7 @@ PrintNextChar(CharList)
 ;                             ...in all of the combinations below.
 ; 
 
-; TODO: Figure out how to make this NOT invalidate the others...
-; Alt up::Send, {Right} ; Un-highlight the current character when done.
+~$Alt Up::DeselectPrintedChar() ; Deselects last char on ALT release.
 
 ; Alt + a
 !a::PrintNextChar("å á à â ã ä")
