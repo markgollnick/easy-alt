@@ -1,7 +1,9 @@
-﻿EAT
-===
+﻿Easy-Alt Typography
+===================
 
-Easy-Alt Typography, Version 1.0.
+Easy-Alt Typography, Version 1.1.
+
+*“Easy-Alt EATs Alt Codes!”*
 
 
 Description
