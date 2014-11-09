@@ -56,7 +56,7 @@ pages. Consulting them will be of help:
     2. I don’t know enough AutoHotKey to do such a thing yet. But do feel free
        to contribute if this is something you would like to see!
 
-[AutoHotKey]: http://www.autohotkey.com/
+[AutoHotKey]: http://ahkscript.org/
 [IronAHK]: http://www.ironahk.net/
 
 **For more detail on usage, see “Rationale” below.**
